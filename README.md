@@ -38,5 +38,16 @@ It features real-time gesture recognition, video uploads, secure Google authenti
 
 ---
 
-## 📂 Project Structure
+
+## ⚙️ Installation and Setup
+
+### Prerequisites
+- Python 3.8 or higher
+- pip package manager
+- Git
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/isl-sign-language-web-app.git
+cd isl-sign-language-web-app
 
