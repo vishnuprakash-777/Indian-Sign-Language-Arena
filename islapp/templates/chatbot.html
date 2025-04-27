@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Indian Sign Language Arena - Knowledge Assistant{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex align-items-center">
+                        <img src="{% static 'ISLRTC-Logo-Design-Contest.png' %}" alt="ISL Arena Logo" class="mr-3" style="height: 40px;">
+                        <h3 class="mb-0 text-white">Indian Sign Language Knowledge Assistant</h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                   
+                    
+                    <form method="post" class="mb-4">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="text" name="query" class="form-control form-control-lg" 
+                                   placeholder="Type your question here..." required>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search mr-2"></i> Search
+                                </button>
+                            </div>
+                        </div>
+                        <small class="text-muted">Examples: "What is the sign for ASL?", "How do negations work in ISL?"</small>
+                    </form>
+                    
+                    {% if response %}
+                    <div class="response-section p-4 bg-light rounded">
+                        <h4 class="border-bottom pb-2 mb-3">Answer:</h4>
+                        <div class="response-content">
+                            {{ response|linebreaks }}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card-footer text-center text-muted">
+                    <small>© {% now "Y" %} Indian Sign Language Arena. All rights reserved.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

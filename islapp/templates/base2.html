@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" type="image/png" href="{% static '/dist/assets/images/logos/favicon.png' %}" />
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{% static 'dist/assets/css/styles.css' %}" />
+    <title>{% block title %}My Site{% endblock %}</title>
+    <style>
+            html, body {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+      }
+
+      body {
+          flex: 1;
+      }
+
+      footer {
+          margin-top: auto;
+          width: 100%;
+      }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-dark">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between flex-md-nowrap flex-wrap py-7 py-md-5">
+                <h2 class="fs-15 fw-bolder mb-0 text-white">
+                    <img src="{% static '/dist/assets/images/logos/logo-icon-white.svg' %}" alt="logo" class="me-3" style="height: 40px;">
+                    Indian Sign Language Arena
+                </h2>
+                <div class="d-flex align-items-center gap-6">
+                    <a href="{% url 'dashboard' %}" class="text-white-50 fw-bolder link-primary fs-3 text-uppercase">Home_Page</a>
+                    <iconify-icon icon="solar:alt-arrow-right-outline" class="fs-5 text-muted"></iconify-icon>
+                    <a href="{% url 'admin_logout' %}" class="text-primary link-primary fw-bolder fs-3 text-uppercase">
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer class="bg-dark">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between flex-md-nowrap flex-wrap py-13 border-top border-dark-subtle">
+                <div class="d-flex gap-3">
+                    <img src="{% static '/dist/assets/images/logos/logo-icon-white.svg' %}" alt="logo">
+                    <p class="text-white opacity-50 mb-0">All rights reserved by info@kochi.digital. </p>
+                </div>
+                <div>
+                    <p class="text-white mb-0">
+                        <span class="opacity-50">Produced by</span>
+                        <a href="https://adminmart.com/" class="text-white link-primary">Department of Computer Science NASC</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+
+    <!-- Import Js Files -->
+    <script src="{% static 'dist/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'dist/assets/libs/simplebar/dist/simplebar.min.js' %}"></script>
+    <script src="{% static 'dist/assets/js/theme/app.init.js' %}"></script>
+    <script src="{% static 'dist/assets/js/theme/theme.js' %}"></script>
+    <script src="{% static 'dist/assets/js/theme/app.min.js' %}"></script>
+    <script src="{% static 'dist/assets/js/theme/sidebarmenu.js' %}"></script>
+    <!-- Solar Icons (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+    <script src="{% static 'dist/assets/libs/fullcalendar/index.global.min.js' %}"></script>
+    <script src="{% static 'dist/assets/js/apps/calendar-init.js' %}"></script>
+    <script src="{% static 'dist/assets/js/vendor.min.js' %}"></script>
+    <script src="{% static 'dist/assets/libs/apexcharts/dist/apexcharts.min.js' %}"></script>
+    <script src="{% static 'dist/assets/js/dashboards/dashboard3.js' %}"></script>
+</body>
+</html>

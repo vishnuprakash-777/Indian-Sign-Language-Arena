@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Indian Sign Language Arena - Recognition System{% endblock %}
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex align-items-center">
+                        <img src="{% static 'ISLRTC-Logo-Design-Contest.png' %}" alt="ISL Arena Logo" class="me-3" height="40">
+                        <h2 class="mb-0 text-white">Indian Sign Language Recognition System</h2>
+                    </div>
+                </div>
+                
+                <div class="card-body p-4">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> Record or upload a video to analyze and recognize Indian Sign Language gestures
+                    </div>
+                    
+                    <form id="uploadForm" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <!-- Model Selection -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Select Recognition Model:</label>
+                            <select name="model_choice" class="form-select form-select-lg" required>
+                                <option value="">-- Choose Model --</option>
+                                <option value="season">Season Signs</option>
+                                <option value="clothes">Clothing Signs</option>
+                                <option value="electronics">Electronics Signs</option>
+                            </select>
+                            <div class="form-text">Choose the category of signs you want to recognize</div>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <!-- Upload Existing Video -->
+                                <div class="card h-100">
+                                    <div class="card-header bg-light">
+                                        <h5 class="mb-0"><i class="fas fa-upload me-2"></i>Upload Video</h5>
+                                    </div>
+                                    <div class="card-body text-center p-4">
+                                        <div class="mb-3">
+                                            <label for="videoUploadInput" class="form-label d-block">
+                                                <div class="upload-area p-4 rounded border border-dashed border-secondary mb-2">
+                                                    <i class="fas fa-cloud-upload-alt fa-3x text-secondary mb-3"></i>
+                                                    <p>Click to browse or drag video file here</p>
+                                                </div>
+                                                <input type="file" name="video" accept="video/*" id="videoUploadInput" class="form-control" style="display: none;">
+                                            </label>
+                                            <span id="uploadFileName" class="text-muted small">No file selected</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <!-- Webcam Recording -->
+                                <div class="card h-100">
+                                    <div class="card-header bg-light">
+                                        <h5 class="mb-0"><i class="fas fa-video me-2"></i>Record with Webcam</h5>
+                                    </div>
+                                    <div class="card-body text-center p-4">
+                                        <video id="preview" autoplay muted width="100%" style="border-radius:8px; border:1px solid #ddd;"></video>
+                                        <div class="mt-3">
+                                            <button type="button" id="startBtn" class="btn btn-primary me-2">
+                                                <i class="fas fa-record-vinyl me-1"></i> Start Recording
+                                            </button>
+                                            <button type="button" id="stopBtn" disabled class="btn btn-danger">
+                                                <i class="fas fa-stop-circle me-1"></i> Stop
+                                            </button>
+                                        </div>
+                                        <div id="recordingStatus" class="mt-2 text-muted"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hidden input for webcam recorded video -->
+                        <input type="file" name="video" id="recordedVideoInput" hidden>
+                        
+                        <!-- Playback of recorded video -->
+                        <div id="playbackContainer" class="mb-4 text-center" style="display:none;">
+                            <h5 class="mb-3">Preview Recorded Video</h5>
+                            <video id="playback" controls width="50%" style="border-radius:8px; border:1px solid #ddd;"></video>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" id="uploadBtn" class="btn btn-success btn-lg">
+                                <i class="fas fa-brain me-2"></i> Analyze & Recognize Sign
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="card-footer text-center text-muted py-3">
+                    <small>© {% now "Y" %} Indian Sign Language Arena. For research and educational purposes only.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const preview = document.getElementById('preview');
+    const playback = document.getElementById('playback');
+    const playbackContainer = document.getElementById('playbackContainer');
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const recordedVideoInput = document.getElementById('recordedVideoInput');
+    const uploadInput = document.getElementById('videoUploadInput');
+    const recordingStatus = document.getElementById('recordingStatus');
+    const uploadFileName = document.getElementById('uploadFileName');
+    
+    let mediaRecorder, recordedChunks = [], recordingTimer, countdownInterval;
+    let maxRecordingTime = 10; // in seconds
+    
+    // Display file name when selected
+    uploadInput.addEventListener('change', () => {
+        if (uploadInput.files.length > 0) {
+            uploadFileName.textContent = uploadInput.files[0].name;
+            recordedVideoInput.value = '';
+            playbackContainer.style.display = 'none';
+        }
+    });
+    
+    // Setup webcam
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+        .then(stream => {
+            preview.srcObject = stream;
+            mediaRecorder = new MediaRecorder(stream);
+            
+            mediaRecorder.ondataavailable = e => {
+                if (e.data.size > 0) recordedChunks.push(e.data);
+            };
+            
+            mediaRecorder.onstop = () => {
+                clearInterval(countdownInterval);
+                recordingStatus.textContent = '';
+                
+                const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                const file = new File([blob], 'recorded_video.webm', { type: 'video/webm' });
+                const dt = new DataTransfer();
+                dt.items.add(file);
+                recordedVideoInput.files = dt.files;
+                uploadInput.value = '';
+                uploadFileName.textContent = 'No file selected';
+                
+                const videoURL = URL.createObjectURL(blob);
+                playback.src = videoURL;
+                playbackContainer.style.display = 'block';
+            };
+            
+            startBtn.onclick = () => {
+                recordedChunks = [];
+                mediaRecorder.start();
+                startBtn.disabled = true;
+                stopBtn.disabled = false;
+                playbackContainer.style.display = 'none';
+                
+                // Setup countdown timer
+                let timeLeft = maxRecordingTime;
+                recordingStatus.innerHTML = `<span class="badge bg-danger">Recording</span> ${timeLeft}s remaining`;
+                
+                countdownInterval = setInterval(() => {
+                    timeLeft--;
+                    recordingStatus.innerHTML = `<span class="badge bg-danger">Recording</span> ${timeLeft}s remaining`;
+                    if (timeLeft <= 0) {
+                        clearInterval(countdownInterval);
+                    }
+                }, 1000);
+                
+                recordingTimer = setTimeout(() => {
+                    if (mediaRecorder.state !== 'inactive') {
+                        mediaRecorder.stop();
+                        startBtn.disabled = false;
+                        stopBtn.disabled = true;
+                    }
+                }, maxRecordingTime * 1000);
+            };
+            
+            stopBtn.onclick = () => {
+                clearTimeout(recordingTimer);
+                clearInterval(countdownInterval);
+                if (mediaRecorder.state !== 'inactive') {
+                    mediaRecorder.stop();
+                }
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+            };
+        })
+        .catch(err => {
+            preview.style.display = 'none';
+            document.querySelector('.col-md-6:nth-child(2) .card-body').innerHTML = 
+                `<div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i> 
+                    Unable to access camera. Please check permissions or use video upload instead.
+                </div>`;
+            console.error("Error accessing webcam:", err);
+        });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
+{% load static %}
+{% load socialaccount %}
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'dist/assets/images/logos/favicon.png' %}" />
+    
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{% static 'dist/assets/css/styles.css' %}" />
+
+    <title> Admin Login</title>
+</head>
+
+<body>
+    <div class="position-relative overflow-hidden radial-gradient min-vh-100 w-100">
+        <div class="position-relative z-index-5">
+            <div class="row gx-0">
+
+                <!-- Login Form Section -->
+                <div class="col-lg-6 col-xl-5 col-xxl-4">
+                    <div class="min-vh-100 bg-body row justify-content-center align-items-center p-5">
+                        <div class="col-12 auth-card">
+                            
+                            <h2 class="mb-2 mt-4 fs-7 fw-bolder">Admin Sign In</h2>
+                            <p class="mb-9"> ISL Dashboard</p>
+                            <!-- Display Messages (Errors) -->
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p class="text-danger">{{ message }}</p>
+                                {% endfor %}
+                            {% endif %}
+                            
+                            <!-- Login Form -->
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="user_name" class="form-label">Username</label>
+                                    <input type="text" name="username" class="form-control" id="user_name" required />
+                                </div>
+                                <div class="mb-4">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" name="password" class="form-control" id="password" required />
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Sign In</button>
+
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-6 col-xl-7 col-xxl-8 position-relative overflow-hidden bg-dark d-none d-lg-block">
+                    <div class="circle-top"></div>
+                    <div>
+                       
+                    </div>
+                    <div class="d-lg-flex align-items-center z-index-5 position-relative h-n80">
+                        <div class="row justify-content-center w-100">
+                            <div class="col-lg-6">
+                                <h2 class="text-white fs-10 mb-3 lh-sm">
+                                    Welcome to
+                                    <br />
+                                    Indian Sign Language Arena
+                                </h2>
+                                <span class="opacity-75 fs-4 text-white d-block mb-3">
+                                    Empowering communication through gesture recognition and inclusive technology.
+                                </span>
+                               
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Js Files -->
+    <script src="{% static 'dist/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'dist/assets/js/theme/app.init.js' %}"></script>
+</body>
+</html>

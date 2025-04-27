@@ -1,0 +1,234 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Indian Sign Language Arena - Home{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <!-- Hero Section -->
+    <div class="row align-items-center mb-5 bg-light rounded shadow-sm p-4 position-relative overflow-hidden">
+        <div class="position-absolute top-0 start-0 w-100 h-2 bg-primary"></div>
+        <div class="col-lg-6">
+            <h3 class="fw-bold mb-3 text-primary">What We Provide?</h3>
+            <p class="lead mb-4 text-muted">Bridging communication gaps through technology and innovation. Explore, learn, and interact with Indian Sign Language using our advanced recognition tools.</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a href="{% url 'predict_action' %}" class="btn btn-primary btn-lg px-4 me-md-2">Try Recognition</a>
+                <a href="{% url 'video_gallery' %}" class="btn btn-outline-secondary btn-lg px-4">Explore Videos</a>
+            </div>
+        </div>
+        <div class="col-lg-6 mt-4 mt-lg-0">
+            <div class="rounded-lg overflow-hidden shadow-lg transform-hover">
+                <img src="{% static 'images.jpg' %}" alt="Indian Sign Language" class="img-fluid rounded hover-zoom">
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="py-5">
+        <div class="text-center mb-5">
+          <h2 class="fw-bold">Our Features</h2>
+          <div class="border-bottom border-primary mx-auto" style="width: 80px; height: 4px;"></div>
+        </div>
+        
+        <div class="row g-4">
+          <!-- Sign Recognition Card -->
+          <div class="col-md-4">
+            <div class="card h-100 shadow border-0 hover-lift">
+              <div class="card-body text-center p-4">
+                <div class="mb-3 rounded-circle bg-primary bg-opacity-10 p-3 d-inline-block">
+                  <!-- Custom Hand Recognition SVG -->
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-primary">
+                    <path d="M6.5 10C7.32843 10 8 9.32843 8 8.5C8 7.67157 7.32843 7 6.5 7C5.67157 7 5 7.67157 5 8.5C5 9.32843 5.67157 10 6.5 10Z" fill="currentColor"/>
+                    <path d="M18 8.5C18 9.32843 17.3284 10 16.5 10C15.6716 10 15 9.32843 15 8.5C15 7.67157 15.6716 7 16.5 7C17.3284 7 18 7.67157 18 8.5Z" fill="currentColor"/>
+                    <path d="M12 17C14.2091 17 16 15.2091 16 13H8C8 15.2091 9.79086 17 12 17Z" fill="currentColor"/>
+                    <path d="M10 13.5V8C10 7.44772 10.4477 7 11 7C11.5523 7 12 7.44772 12 8V10.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M14 13.5V8C14 7.44772 13.5523 7 13 7C12.4477 7 12 7.44772 12 8V10.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12Z" fill="currentColor"/>
+                  </svg>
+                </div>
+                <h3 class="card-title h4 mb-3">Sign Recognition</h3>
+                <p class="card-text">Our AI-powered system recognizes Indian Sign Language gestures through video analysis with high accuracy.</p>
+                <a href="{% url 'predict_action' %}" class="btn btn-sm btn-primary mt-3">Try Recognition</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Video Gallery Card -->
+          <div class="col-md-4">
+            <div class="card h-100 shadow border-0 hover-lift">
+              <div class="card-body text-center p-4">
+                <div class="mb-3 rounded-circle bg-primary bg-opacity-10 p-3 d-inline-block">
+                  <!-- Custom Video Library SVG -->
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-primary">
+                    <path d="M3 5C3 3.89543 3.89543 3 5 3H14C15.1046 3 16 3.89543 16 5V7H14V5H5V19H14V17H16V19C16 20.1046 15.1046 21 14 21H5C3.89543 21 3 20.1046 3 19V5Z" fill="currentColor"/>
+                    <path d="M17.5 12L22 8V16L17.5 12Z" fill="currentColor"/>
+                    <path d="M13 8.5C13 7.67157 13.6716 7 14.5 7H18.5C19.3284 7 20 7.67157 20 8.5V15.5C20 16.3284 19.3284 17 18.5 17H14.5C13.6716 17 13 16.3284 13 15.5V8.5Z" stroke="currentColor" stroke-width="2"/>
+                    <path d="M7 8H12M7 12H12M7 16H12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <h3 class="card-title h4 mb-3">Video Gallery</h3>
+                <p class="card-text">Browse our collection of ISL videos categorized by themes, everyday situations, and learning levels.</p>
+                <a href="{% url 'video_gallery' %}" class="btn btn-sm btn-primary mt-3">Explore Videos</a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- AI Chatbot Card -->
+          <div class="col-md-4">
+            <div class="card h-100 shadow border-0 hover-lift">
+              <div class="card-body text-center p-4">
+                <div class="mb-3 rounded-circle bg-primary bg-opacity-10 p-3 d-inline-block">
+                  <!-- Custom AI Assistant SVG -->
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-primary">
+                    <path d="M12 4C10.4 4 9.0125 4.825 8.3625 6H15.6375C14.9875 4.825 13.6 4 12 4Z" fill="currentColor"/>
+                    <path d="M14 14C14 15.1046 13.1046 16 12 16C10.8954 16 10 15.1046 10 14C10 12.8954 10.8954 12 12 12C13.1046 12 14 12.8954 14 14Z" fill="currentColor"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8 9C8 8.44772 8.44772 8 9 8H15C15.5523 8 16 8.44772 16 9V14C16 16.7614 13.7614 19 11 19H8C7.44772 19 7 18.5523 7 18V17H6C5.44772 17 5 16.5523 5 16V11C5 10.4477 5.44772 10 6 10H7V9ZM7 12H6V16H7V12Z" fill="currentColor"/>
+                    <path d="M17 9V11C18.1046 11 19 11.8954 19 13V15C19 16.1046 18.1046 17 17 17V18C17 18.5523 17.4477 19 18 19H19C19.5523 19 20 18.5523 20 18V9C20 8.44772 19.5523 8 19 8H18C17.4477 8 17 8.44772 17 9Z" fill="currentColor"/>
+                    <path d="M11 21C12.1046 21 13 20.1046 13 19H9C9 20.1046 9.89543 21 11 21Z" fill="currentColor"/>
+                  </svg>
+                </div>
+                <h3 class="card-title h4 mb-3">AI Chatbot</h3>
+                <p class="card-text">Get answers to your questions about Indian Sign Language from our knowledge base assistant.</p>
+                <a href="{% url 'chatbot' %}" class="btn btn-sm btn-primary mt-3">Ask Questions</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <style>
+        /* Add hover effect to cards */
+        .hover-lift {
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+        }
+        
+        /* Add pulse animation to icon backgrounds */
+        .card:hover .rounded-circle {
+          animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+          0% {
+            box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.2);
+          }
+          70% {
+            box-shadow: 0 0 0 10px rgba(13, 110, 253, 0);
+          }
+          100% {
+            box-shadow: 0 0 0 0 rgba(13, 110, 253, 0);
+          }
+        }
+      </style>
+
+    <!-- About Section -->
+    <div class="row py-5 align-items-center bg-light rounded shadow-sm p-4 my-5 position-relative">
+        <div class="position-absolute top-0 end-0 w-100 h-2 bg-primary"></div>
+        <div class="col-md-6 order-md-2">
+            <h2 class="fw-bold mb-4 text-primary border-start border-primary border-4 ps-3">About Indian Sign Language Arena</h2>
+            <p class="mb-3">The Indian Sign Language Arena is a comprehensive platform dedicated to promoting awareness, learning, and accessibility of Indian Sign Language (ISL). Our mission is to bridge communication gaps between hearing and deaf communities through technology.</p>
+            <p class="mb-3">With advanced AI-powered recognition systems, educational resources, and interactive tools, we aim to make ISL more accessible to everyone. Our platform caters to beginners learning sign language, interpreters enhancing their skills, and researchers studying sign language patterns.</p>
+            <p>We collaborate with deaf communities and sign language experts to ensure our platform represents authentic ISL usage and cultural context.</p>
+            <div class="mt-4">
+                <a href="#" class="btn btn-outline-primary">Learn More About Us</a>
+            </div>
+        </div>
+        <div class="col-md-6 order-md-1 mb-4 mb-md-0">
+            <div class="p-2 bg-white rounded shadow transform-hover">
+                <img src="{% static 'ThumbnailLearnBasicIndianSignLanguage.png' %}" alt="ISLRTC Logo" class="img-fluid rounded hover-zoom" width="100%">
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Call to Action -->
+    <div class="text-center py-5 px-4 bg-primary bg-opacity-10 rounded shadow-sm">
+        <h2 class="fw-bold mb-3">Ready to Get Started?</h2>
+        <p class="lead mb-4">Begin your journey with Indian Sign Language today. Use our tools to recognize, learn, and practice ISL.</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="{% url 'predict_action' %}" class="btn btn-primary btn-lg px-4 me-sm-3">Try Recognition</a>
+            <a href="{% url 'chatbot' %}" class="btn btn-outline-primary btn-lg px-4">Ask Questions</a>
+        </div>
+    </div>
+</div>
+<!-- Additional styles to add to your existing style section -->
+<style>
+    /* Existing styles */
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .hover-lift:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    }
+    
+    /* Add pulse animation to icon backgrounds */
+    .card:hover .rounded-circle {
+      animation: pulse 1.5s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.2);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(13, 110, 253, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(13, 110, 253, 0);
+      }
+    }
+    
+    /* Professional background styles */
+    .transform-hover {
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+      overflow: hidden;
+    }
+    
+    .transform-hover:hover {
+      transform: scale(1.02);
+      box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
+    }
+    
+    .hover-zoom {
+      transition: transform 0.5s ease;
+    }
+    
+    .transform-hover:hover .hover-zoom {
+      transform: scale(1.05);
+    }
+    
+    /* Professional background patterns and gradients */
+    .hero-section {
+      background: linear-gradient(to right, #f8f9fa, #e9ecef);
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    
+    .about-section {
+      background: linear-gradient(to right, #f1f5f9, #e2e8f0);
+      background-image: url("data:image/svg+xml,%3Csvg width='84' height='48' viewBox='0 0 84 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h12v6H0V0zm28 8h12v6H28V8zm14-8h12v6H42V0zm14 0h12v6H56V0zm0 8h12v6H56V8zM42 8h12v6H42V8zm0 16h12v6H42v-6zm14-8h12v6H56v-6zm14 0h12v6H70v-6zm0-16h12v6H70V0zM28 32h12v6H28v-6zM14 16h12v6H14v-6zM0 24h12v6H0v-6zm0 8h12v6H0v-6zm14 0h12v6H14v-6zm14 8h12v6H28v-6zm-14 0h12v6H14v-6zm28 0h12v6H42v-6zm14-8h12v6H56v-6zm0-8h12v6H56v-6zm14 8h12v6H70v-6zm0 8h12v6H70v-6zM14 24h12v6H14v-6zm14-8h12v6H28v-6zM14 8h12v6H14V8zM0 8h12v6H0V8z' fill='%23000000' fill-opacity='0.02' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
+    
+    .cta-section {
+      background: linear-gradient(120deg, #e6f2ff 0%, #f0f7ff 100%);
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%230d6efd' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
+    
+    .features-heading {
+      position: relative;
+    }
+    
+    .features-heading:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(13,110,253,0) 0%, rgba(13,110,253,0.5) 50%, rgba(13,110,253,0) 100%);
+      bottom: -15px;
+      left: 0;
+    }
+  </style>
+{% endblock %}
