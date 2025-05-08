@@ -36,10 +36,7 @@ It features real-time gesture recognition, video uploads, secure Google authenti
 - **Database**: SQLite (Default), can be upgraded to PostgreSQL
 - **Deployment Ready**: Can be containerized using Docker (optional)
 
----
 
-
-]
 
 
 
